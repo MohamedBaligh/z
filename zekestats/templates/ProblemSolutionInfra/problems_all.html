@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+
+{% for question in questions %}
+   <div class="panel panel-default">
+   <div class="panel-heading">Problem Title : 
+   <a href="/probandsols/problem/{{question.slug}}">
+   {{question.title}}
+   </a>
+   </div>
+   <div class="panel-body">{{question.details}}</div>
+   <div class="panel-body">Datasets : 
+   {% for dataset in question.datasets.all %}
+   <a href="/data/datainfo/{{dataset.slug}}"><small>{{dataset}}</small></a>,&nbsp;
+   {% endfor %}
+   </div>
+   </div>
+{% endfor %}
+
+{% endblock %}

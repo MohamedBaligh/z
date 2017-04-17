@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+   <h3>{{data.name}}</h3>
+   <hr/>
+  <div class="row">
+  <div class="col-sm-8">
+  <table class="table table-striped table-condensed">
+  
+  <div class="panel panel-default">
+    <div class="panel-heading">Data Schema Information 
+    <a href= "/media/{{data.data}}" alt="" class="pull-right">Download Data</a>
+    <a href= "#problems" alt="" class="pull-right">Problems</a></div>
+    
+  </div>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Field</th>
+        <th>Details</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for meta in metadata %}
+      <tr>
+      <td>{{forloop.counter}}</td>
+      <td>{{meta.0}}</td>
+      <td>{{meta.1}}</td>
+      </tr>
+   {% endfor %}
+    </tbody>
+   </table>
+   
+   <div id="problems" class="panel panel-default">
+   <div class="panel-heading">Problems based on this Dataset</div> 
+   {% for problem in data.problem_set.all %}
+   <div class="panel-body">
+   <a href="/probandsols/problem/{{problem.slug}}">{{problem}}</a>
+   </div>
+   {% endfor %}
+   </div>
+   </div>
+   <div class="col-sm-4">
+   <div class="panel panel-default">
+    <div class="panel-heading">Similar Datasets</div>
+    <div class="panel-body">
+    {% for s in similar %}
+    <a href="/data/datainfo/{{s.slug}}">{{s}}</a>
+    {% endfor %}
+    </div>
+    </div>
+    </div>
+   </div>
+{% endblock %}
